@@ -72,3 +72,66 @@ bool is_permutation_count_method(std::string str1, std::string str2)
     }
     return true;
 }
+
+void urlify(char* str, int len)
+{   int token_len = 3;
+    const char token[token_len] = "%20";
+    char* tmp = str + len - 1;
+    int inserted = 0;
+    for (int i = 0; i < len; i++)
+    {
+        if (*tmp == ' ')
+        {
+            char* tmp1 = str + len + token_len - 2 + inserted;
+            char* tmp2 = str + len - 1 + inserted;
+            for (int j = 0; j < i + inserted; j++)
+            {
+                *tmp1 = *tmp2;
+                tmp1--;
+                tmp2--;
+            }
+            for (int k = token_len - 1; k >= 0; k--)
+            {
+                *tmp1 = token[k];
+                tmp1--;
+            }
+            inserted += 2;
+        }
+        tmp--;
+    }
+}
+
+void urlify_count_method(char* str, int len)
+{
+    int token_len = 3;
+    int spaces = 0;
+    for (int i = 0; i < len; i++)
+    {
+        if (str[i] == ' ')
+        {
+            spaces++;
+        }
+    }
+
+    int additional = spaces * (token_len - 1);
+    int expected_len = len + additional;
+    char* tmp1 = str + expected_len - 1;
+    char* tmp2 = str + len - 1;
+    for (int j = 0; j < len; j++)
+    {
+        if (*tmp2 == ' ')
+        {
+            *tmp1 = '0';
+            tmp1--;
+            *tmp1 = '2';
+            tmp1--;
+            *tmp1 = '%';
+        }
+        else
+        {
+            *tmp1 = *tmp2;
+        }
+        tmp1--;
+        tmp2--;
+    }
+}
