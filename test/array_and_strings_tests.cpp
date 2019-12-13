@@ -51,5 +51,14 @@ TEST(array_and_strings_tests, urlify_test) {
     urlify_count_method(str4, len);
     std::string out_str4(str4);
     ASSERT_EQ("%20%20%20%20", out_str4);
+}
 
+TEST(array_and_strings_tests, is_palindrom_permutation_test) {
+    // method 1
+    std::string str = "Tact Coa";
+    ASSERT_TRUE(is_palidrom_permutation(str));
+    str = "Omper om erp";
+    ASSERT_TRUE(is_palidrom_permutation(str));
+    str = " Tactboa";
+    ASSERT_FALSE(is_palidrom_permutation(str));
 }

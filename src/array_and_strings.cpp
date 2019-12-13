@@ -135,3 +135,129 @@ void urlify_count_method(char* str, int len)
         tmp2--;
     }
 }
+
+bool is_palidrom_permutation(std::string str)
+{
+    std::vector<char> unique;
+    unique.reserve(str.length());
+    std::vector<uint> space_idx;
+    space_idx.reserve(str.length());
+    char val_single = ' ';
+    int single = 0;
+    int chars_count = 0;
+    int chars[256] = {0};
+    for (auto& ch : str)
+    {
+        if (ch != ' ')
+        {
+            int val = std::tolower(ch);
+            chars[val]++;
+            chars_count++;
+        }
+    }
+    // even length
+    if (chars_count % 2 == 0)
+    {
+        for (uint i = 0; i < str.length(); i++)
+        {
+            if (str[i] == ' ')
+            {
+                space_idx.push_back(i);
+                continue;
+            }
+            int val = std::tolower(str[i]);
+            if (chars[val] == 0)
+            {
+                continue;
+            }
+            if (chars[val] % 2 != 0)
+            {
+                return false;
+            }
+            unique.push_back(std::tolower(str[i]));
+            chars[val] -= 2;
+        }
+    }
+    // odd length
+    else
+    {
+        for (uint i = 0; i < str.length(); i++)
+        {
+            if (str[i] == ' ')
+            {
+                space_idx.push_back(i);
+                continue;
+            }
+            int val = std::tolower(str[i]);
+            if (chars[val] == 0)
+            {
+                continue;
+            }
+            if (chars[val] % 2 != 0)
+            {
+                if (single == 0)
+                {
+                    single++;
+                    val_single = std::tolower(str[i]);
+                    continue;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            unique.push_back(std::tolower(str[i]));
+            chars[val] -= 2;
+       }      
+    }
+    std::cout << "Permutations: " << std::endl;
+    palindrom_permutations(unique, space_idx, val_single);
+    return true;
+}
+
+void palindrom_permutations(std::vector<char> unique, std::vector<uint> space_idx, char single)
+{
+    palindrom_permutations_(unique, space_idx, single, "");
+}
+
+void palindrom_permutations_(std::vector<char> unique, std::vector<uint> space_idx, char single, std::string out)
+{
+    if (unique.size() == 0)
+    {
+        uint length_tmp = out.length();
+        if (single != ' ')
+        {
+            out += single;
+        }
+        for (int i = length_tmp - 1; i >= 0; i--)
+        {
+            out += out[i];
+        }
+        for (int j = out.length() - 1; j > 0; j--)
+        {
+            for (auto& idx : space_idx)
+            {
+                if (static_cast<int>(idx) == j)
+                {
+                    auto out1 = out.substr(0, j);
+                    auto out2 = out.substr(j, out.length() - j);
+                    out = out1 + ' ' + out2;
+                }
+            }
+        }
+        std::cout << out << std::endl;
+    }
+    for (uint i = 0; i < unique.size(); i++)
+    {
+        auto foo = out + unique[i];
+        std::vector<char> unique_reduced;
+        for (uint j = 0; j < unique.size(); j++)
+        {
+            if (j != i)
+            {
+                unique_reduced.push_back(unique[j]);
+            }
+        }
+        palindrom_permutations_(unique_reduced, space_idx, single, foo);
+    }
+}

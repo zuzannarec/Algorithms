@@ -21,7 +21,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_FLAGS "-std=c++17 -Wall -g -Wno-deprecated -pthread")
 
 # add the executable    
-add_executable(${PROJECT_EXEC_NAME_STR} "${PROJECT_SOURCE_DIR}/main.cpp")
+add_executable(${PROJECT_EXEC_NAME_STR} "${PROJECT_SOURCE_DIR}/main.cpp" "${PROJECT_SOURCE_DIR}/src/permutation.cpp")
 target_include_directories(${PROJECT_EXEC_NAME_STR} PRIVATE "${PROJECT_SOURCE_DIR}/include")
 target_link_libraries(${PROJECT_EXEC_NAME_STR} ${PROJECT_LIB_NAME_STR})
 
