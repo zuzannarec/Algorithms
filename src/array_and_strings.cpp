@@ -261,3 +261,51 @@ void palindrom_permutations_(std::vector<char> unique, std::vector<uint> space_i
         palindrom_permutations_(unique_reduced, space_idx, single, foo);
     }
 }
+
+bool one_away(std::string str1, std::string str2)
+{
+    // check length
+    if (abs(str1.length() - str2.length()) > 1)
+    {
+        return false;
+    }
+    std::string::iterator longer;
+    std::string::iterator longer_end;
+    std::string::iterator shorter;
+    if (str1.length() >= str2.length())
+    {
+        longer = str1.begin();
+        longer_end = str1.end();
+        shorter = str2.begin();
+    }
+    else
+    {
+        longer = str2.begin();
+        longer_end = str2.end();
+        shorter = str1.begin();
+    }
+    int diff = 0;
+    while (longer != (longer_end + 1))
+    {
+        if (*longer != *shorter)
+        {
+            diff++;
+            if (str1.length() == str2.length())
+            {
+                shorter++;
+            }
+            longer++;
+        }
+        else
+        {
+            longer++;
+            shorter++;
+        }
+        if (diff > 1)
+        {
+            return false;
+        }
+        
+    }
+    return true;
+}

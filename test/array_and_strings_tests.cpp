@@ -62,3 +62,17 @@ TEST(array_and_strings_tests, is_palindrom_permutation_test) {
     str = " Tactboa";
     ASSERT_FALSE(is_palidrom_permutation(str));
 }
+
+TEST(array_and_strings_tests, one_away) {
+    // method 1
+    std::string str1 = "pales";
+    std::string str2 = "pale";
+    ASSERT_TRUE(one_away(str1, str2));
+    str1 = "pale";
+    str2 = "ple";
+    ASSERT_TRUE(one_away(str1, str2));
+    str2 = "bale";
+    ASSERT_TRUE(one_away(str1, str2));
+    str2 = "bake";
+    ASSERT_FALSE(one_away(str1, str2));
+}

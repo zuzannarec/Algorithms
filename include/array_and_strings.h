@@ -19,3 +19,5 @@ bool is_palidrom_permutation(std::string str);
 void palindrom_permutations(std::vector<char> unique, std::vector<uint> space_idx, char single);
 
 void palindrom_permutations_(std::vector<char> unique, std::vector<uint> space_idx, char single, std::string out);
+
+bool one_away(std::string str1, std::string str2);
