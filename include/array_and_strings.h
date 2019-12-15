@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include <iostream>
 #include <vector>
+#include <map>
 
 bool check_if_unique(std::string str);
 
@@ -16,8 +17,12 @@ void urlify_count_method(char* str, int len);
 
 bool is_palidrom_permutation(std::string str);
 
+bool is_palidrom_permutation_toggle(std::string str);
+
 void palindrom_permutations(std::vector<char> unique, std::vector<uint> space_idx, char single);
 
 void palindrom_permutations_(std::vector<char> unique, std::vector<uint> space_idx, char single, std::string out);
 
 bool one_away(std::string str1, std::string str2);
+
+std::string string_compression(std::string input_string);

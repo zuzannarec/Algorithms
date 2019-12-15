@@ -61,6 +61,14 @@ TEST(array_and_strings_tests, is_palindrom_permutation_test) {
     ASSERT_TRUE(is_palidrom_permutation(str));
     str = " Tactboa";
     ASSERT_FALSE(is_palidrom_permutation(str));
+
+    // method 2
+    str = "Tact Coa";
+    ASSERT_TRUE(is_palidrom_permutation_toggle(str));
+    str = "Omper om erp";
+    ASSERT_TRUE(is_palidrom_permutation_toggle(str));
+    str = " Tactboa";
+    ASSERT_FALSE(is_palidrom_permutation_toggle(str));
 }
 
 TEST(array_and_strings_tests, one_away) {
@@ -75,4 +83,16 @@ TEST(array_and_strings_tests, one_away) {
     ASSERT_TRUE(one_away(str1, str2));
     str2 = "bake";
     ASSERT_FALSE(one_away(str1, str2));
+}
+
+TEST(array_and_strings_tests, string_compression) {
+    // method 1
+    std::string str1 = "aabcccccaaa";
+    std::string str2 = "a2b1c5a3";
+    ASSERT_EQ(string_compression(str1), str2);
+    str1 = "aabcccccaaak";
+    str2 = "a2b1c5a3k1";
+    ASSERT_EQ(string_compression(str1), str2);
+    str1 = "aabc";
+    ASSERT_EQ(string_compression(str1), str1);
 }

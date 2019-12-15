@@ -136,6 +136,34 @@ void urlify_count_method(char* str, int len)
     }
 }
 
+bool is_palidrom_permutation_toggle(std::string str)
+{
+    int bitVector = 0;
+    for (auto& ch : str)
+    {
+        if (ch == ' ')
+        {
+            continue;
+        }
+        int id = std::tolower(ch);
+        int mask = 1 << id;
+        if ((bitVector & mask) == 0)
+        {
+            bitVector |= mask;
+        }
+        else
+        {
+            bitVector &= ~mask;
+        }
+    }
+    if ((bitVector == 0) || ((bitVector & (bitVector - 1)) == 0))
+    {
+        return true;
+    }
+    return false;
+}
+
+
 bool is_palidrom_permutation(std::string str)
 {
     std::vector<char> unique;
@@ -304,8 +332,35 @@ bool one_away(std::string str1, std::string str2)
         if (diff > 1)
         {
             return false;
-        }
-        
+        }     
     }
     return true;
 }
+
+std::string string_compression(std::string input_string)
+{
+    std::string out_string = "";
+    int counter = 0;
+    char last = input_string[0];
+    for (auto& ch : input_string)
+    {
+        if (ch == last)
+        {
+            counter++;
+        }
+        else
+        {
+            out_string += last;
+            out_string += std::to_string(counter);
+            last = ch;
+            counter = 1;
+        }
+    }
+    out_string += last;
+    out_string += std::to_string(counter);
+    if (out_string.length() >= input_string.length())
+    {
+        return input_string;
+    }
+    return out_string;
+}   
