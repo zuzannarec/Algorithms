@@ -363,4 +363,33 @@ std::string string_compression(std::string input_string)
         return input_string;
     }
     return out_string;
-}   
+}
+
+void matrix_rotation(std::vector<std::vector<int32_t>>& matrix, int N)
+{
+    int it_N = N - 1;
+    for (int i = 0; i < it_N; i++)
+    {
+        for (int j = i; j < it_N; j++)
+        {
+            std::tuple<int, int> dest_idx = std::make_tuple(j, N - 1 - i);
+            auto current_idx = std::make_tuple(i, j);
+            replace_value(current_idx, current_idx, dest_idx, matrix, N);
+        }
+        it_N--;
+    }
+}
+
+void replace_value(std::tuple<int, int>& start_idx, std::tuple<int, int> current_idx, std::tuple<int, int> dest_idx, std::vector<std::vector<int32_t>>& matrix, int N)
+{
+    int32_t tmp = matrix[std::get<0>(current_idx)][std::get<1>(current_idx)];
+    auto new_current_idx = dest_idx;
+    if (new_current_idx == start_idx)
+    {
+        matrix[std::get<0>(dest_idx)][std::get<1>(dest_idx)] = tmp;
+        return;
+    }
+    auto new_dest_idx = std::make_tuple(std::get<1>(dest_idx), N - 1 - std::get<0>(dest_idx));
+    replace_value(start_idx, new_current_idx, new_dest_idx, matrix, N);
+    matrix[std::get<0>(dest_idx)][std::get<1>(dest_idx)] = tmp;
+}

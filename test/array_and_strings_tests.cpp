@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include "array_and_strings.h"
+#include <vector>
 
 TEST(array_and_strings_tests, permutation_test) {
     // method 1
@@ -95,4 +96,21 @@ TEST(array_and_strings_tests, string_compression) {
     ASSERT_EQ(string_compression(str1), str2);
     str1 = "aabc";
     ASSERT_EQ(string_compression(str1), str1);
+}
+
+TEST(array_and_strings_tests, rotate_matrix) {
+    // method 1
+    std::vector<std::vector<int32_t>> matrix = {{1, 2, 3, 4, 5},
+                                                {6, 7, 8, 9, 10},
+                                                {11, 12, 13, 14, 15},
+                                                {16, 17, 18, 19, 20},
+                                                {21, 22, 23, 24, 25}};
+    std::vector<std::vector<int32_t>> rotate_matrix = {{21, 16, 11, 6, 1},
+                                                       {22, 17, 12, 7, 2},
+                                                       {23, 18, 13, 8, 3},
+                                                       {24, 19, 14, 9, 4},
+                                                       {25, 20, 15, 10, 5}};
+    int N = 5;
+    matrix_rotation(matrix, N);
+    ASSERT_EQ(matrix, rotate_matrix);
 }
