@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <tuple>
+#include <set>
 
 bool check_if_unique(std::string str);
 
@@ -30,3 +31,5 @@ std::string string_compression(std::string input_string);
 void matrix_rotation(std::vector<std::vector<int32_t>>& matrix, int N);
 
 void replace_value(std::tuple<int, int>& start_idx, std::tuple<int, int> current_idx, std::tuple<int, int> dest_idx, std::vector<std::vector<int32_t>>& matrix, int N);
+
+void zero_matrix(std::vector<std::vector<int32_t>>& matrix);

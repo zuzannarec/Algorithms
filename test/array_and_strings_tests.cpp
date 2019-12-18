@@ -114,3 +114,19 @@ TEST(array_and_strings_tests, rotate_matrix) {
     matrix_rotation(matrix, N);
     ASSERT_EQ(matrix, rotate_matrix);
 }
+
+TEST(array_and_strings_tests, zero_matrix) {
+    // method 1
+    std::vector<std::vector<int32_t>> matrix = {{1, 2, 0, 3, 4, 5},
+                                                {6, 7, 90, 8, 9, 10},
+                                                {11, 12, 22, 13, 14, 15},
+                                                {16, 17, 55, 18, 0, 20},
+                                                {21, 22, 8, 23, 24, 25}};
+    std::vector<std::vector<int32_t>> zeroed_matrix = {{0, 0, 0, 0, 0, 0},
+                                                     {6, 7, 0, 8, 0, 10},
+                                                     {11, 12, 0, 13, 0, 15},
+                                                     {0, 0, 0, 0, 0, 0},
+                                                     {21, 22, 0, 23, 0, 25}};
+    zero_matrix(matrix);
+    ASSERT_EQ(matrix, zeroed_matrix);
+}
