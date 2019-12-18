@@ -130,3 +130,13 @@ TEST(array_and_strings_tests, zero_matrix) {
     zero_matrix(matrix);
     ASSERT_EQ(matrix, zeroed_matrix);
 }
+
+
+TEST(array_and_strings_tests, string_rotation) {
+    std::string str1 = "waterbottle";
+    std::string str2 = "erbottlewat";
+    ASSERT_TRUE(string_rotation(str1, str2));
+    ASSERT_TRUE(string_rotation(str2, str1));
+    str2 = "waterbotlte";
+    ASSERT_FALSE(string_rotation(str1, str2));
+}

@@ -431,3 +431,18 @@ void zero_matrix(std::vector<std::vector<int32_t>>& matrix)
         y_start = y_idx.begin();
     }
 }
+
+bool string_rotation(std::string str1, std::string str2)
+{
+    if (str1.length() != str2.length() ||
+        str1.length() == 0)
+    {
+        return false;
+    }
+    std::string concatenated = str1 + str1;
+    if (concatenated.find(str2) != std::string::npos)
+    {
+        return true;
+    }
+    return false;
+}
