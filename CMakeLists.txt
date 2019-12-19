@@ -9,7 +9,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_FLAGS "-std=c++17 -Wall -g -Wno-deprecated -pthread")
 
 # add static library
-add_library(${PROJECT_LIB_NAME_STR} STATIC "${PROJECT_SOURCE_DIR}/src/array_and_strings.cpp")
+add_library(${PROJECT_LIB_NAME_STR} STATIC
+    "${PROJECT_SOURCE_DIR}/src/array_and_strings.cpp"
+    "${PROJECT_SOURCE_DIR}/src/linked_lists.cpp")
 target_include_directories(${PROJECT_LIB_NAME_STR} PRIVATE "${PROJECT_SOURCE_DIR}/include")
 
 # exec setup
@@ -21,7 +23,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_FLAGS "-std=c++17 -Wall -g -Wno-deprecated -pthread")
 
 # add the executable    
-add_executable(${PROJECT_EXEC_NAME_STR} "${PROJECT_SOURCE_DIR}/main.cpp" "${PROJECT_SOURCE_DIR}/src/permutation.cpp")
+add_executable(${PROJECT_EXEC_NAME_STR} "${PROJECT_SOURCE_DIR}/main.cpp"
+    "${PROJECT_SOURCE_DIR}/src/permutation.cpp")
 target_include_directories(${PROJECT_EXEC_NAME_STR} PRIVATE "${PROJECT_SOURCE_DIR}/include")
 target_link_libraries(${PROJECT_EXEC_NAME_STR} ${PROJECT_LIB_NAME_STR})
 
@@ -72,3 +75,4 @@ add_executable(${PROJECT_TEST_NAME} ${TEST_SRC_FILES})
 target_include_directories(${PROJECT_TEST_NAME} PRIVATE "${PROJECT_SOURCE_DIR}/include")
 target_link_libraries(${PROJECT_TEST_NAME} gtest_main ${PROJECT_LIB_NAME_STR})
 add_test(array_and_strings_tests ${PROJECT_TEST_NAME})
+add_test(linked_lists_tests ${PROJECT_TEST_NAME})
