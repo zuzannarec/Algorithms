@@ -9,7 +9,7 @@ void permutation(std::string str, std::string prefix)
     }
     else
     {
-        for (int i = 0; i < str.length(); i++)
+        for (uint i = 0; i < str.length(); i++)
         {
             std::string rem = str.substr(0, i) + str.substr(i + 1);
             std::cout << "rem: " << rem << std::endl;
