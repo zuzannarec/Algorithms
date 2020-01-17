@@ -4,9 +4,11 @@
 #include <unordered_map>
 #include <memory>
 #include <vector>
+#include <list>
 
 namespace graph
 {
+
 class Node
 {
 public:
@@ -26,10 +28,26 @@ public:
     void reset();
 };
 
-std::vector<int> find_route_between_nodes(Node first, Node second);
-}
+std::pair<bool, std::vector<int>> bfs(Graph graph, int start_node_idx, int end_node_idx);
 
-std::pair<bool, std::vector<int>> bfs(graph::Graph graph, int start_node_idx, int end_node_idx);
+} // namespace graph
 
+namespace tree
+{
+
+class Node
+{
+public:
+    Node(int value);
+    void visit();
+    int value;
+    std::shared_ptr<Node> left = nullptr;
+    std::shared_ptr<Node> right = nullptr;
+    bool visited;
+};
+
+std::shared_ptr<Node> create_minimal_binary_search_tree(std::vector<int> elements);
+
+} // namespace tree
 
 
