@@ -74,44 +74,43 @@ void Node::visit()
     this->visited = true;
 }
 
-std::shared_ptr<Node> create_minimal_binary_search_tree(std::vector<int> elements)
+std::unique_ptr<Node> create_minimal_binary_search_tree(std::vector<int> elements)
 {
     auto it = elements.begin();
-    auto root = std::shared_ptr<Node>(new Node(*it));
-    std::shared_ptr<Node> parent_node;
-    std::shared_ptr<Node> current_node;
+    auto root = std::unique_ptr<Node>(new Node(*it));
+    std::unique_ptr<Node>* parent_node;
+    std::unique_ptr<Node>* current_node;
     while (it != elements.end() - 1)
     {
         it++;
         if (root->left == nullptr)
         {
             auto leftmost_node = std::move(root);
-            root = std::shared_ptr<Node>(new Node(*it));
+            root = std::unique_ptr<Node>(new Node(*it));
             root->left = std::move(leftmost_node);
         }
         else if (root->right == nullptr)
         {
-            root->right = std::shared_ptr<Node>(new Node(*it));
-            parent_node = root;
-            current_node = root->right;
+            root->right = std::unique_ptr<Node>(new Node(*it));
+            parent_node = &root;
+            current_node = &(root->right);
         }
         else
         {
-            if (current_node->right == nullptr)
+            if ((*current_node)->right == nullptr)
             {
-                auto rightmost_child = std::shared_ptr<Node>(new Node(*it));
-                if (current_node->left == nullptr)
+                auto rightmost_child = std::unique_ptr<Node>(new Node(*it));
+                if ((*current_node)->left == nullptr)
                 {
-                    auto tmp = current_node;
-                    parent_node->right = rightmost_child;
-                    parent_node->right->left = tmp;
-                    current_node = rightmost_child;
+                    (*parent_node)->right.swap(rightmost_child);
+                    (*parent_node)->right->left = std::move(rightmost_child);
+                    current_node = &((*parent_node)->right);
                 }
                 else
                 {
-                    current_node->right = rightmost_child;
-                    parent_node = parent_node->right;
-                    current_node = current_node->right;        
+                    (*current_node)->right = std::move(rightmost_child);
+                    parent_node = &((*parent_node)->right);
+                    current_node = &((*current_node)->right);        
                 }
             }
         }

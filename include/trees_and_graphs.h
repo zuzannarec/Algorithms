@@ -41,12 +41,12 @@ public:
     Node(int value);
     void visit();
     int value;
-    std::shared_ptr<Node> left = nullptr;
-    std::shared_ptr<Node> right = nullptr;
+    std::unique_ptr<Node> left = nullptr;
+    std::unique_ptr<Node> right = nullptr;
     bool visited;
 };
 
-std::shared_ptr<Node> create_minimal_binary_search_tree(std::vector<int> elements);
+std::unique_ptr<Node> create_minimal_binary_search_tree(std::vector<int> elements);
 
 } // namespace tree
 

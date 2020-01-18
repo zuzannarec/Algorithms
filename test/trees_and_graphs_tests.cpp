@@ -35,15 +35,15 @@ TEST(trees_and_graphs_tests, create_minimal_binary_search_tree)
     auto root = tree::create_minimal_binary_search_tree(elements);
     std::vector<int> nodes;
     nodes.push_back(root->value);
-    auto current_node = root;
-    while (current_node != nullptr)
+    auto current_node = &root;
+    while ((*current_node) != nullptr)
     {
-        if (current_node->right != nullptr)
+        if ((*current_node)->right != nullptr)
         {
-            nodes.push_back(current_node->left->value);
-            nodes.push_back(current_node->right->value);
+            nodes.push_back((*current_node)->left->value);
+            nodes.push_back((*current_node)->right->value);
         }
-        current_node = current_node->right;
+        current_node = &((*current_node)->right);
     }
     std::vector<int> ref_tree = {2, 1, 4, 3, 6, 5, 8, 7, 9};
     ASSERT_EQ(nodes, ref_tree);
