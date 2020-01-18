@@ -15,7 +15,7 @@ TEST(trees_and_graphs_tests, find_route_between_nodes)
         nodes.insert({i, std::shared_ptr<graph::Node>(new graph::Node(i))});
         for (auto& item : *it)
         {
-            nodes[i]->add_child(item);
+            nodes[i]->add_neighbour(item);
         }
         it++;
     }
@@ -29,10 +29,10 @@ TEST(trees_and_graphs_tests, find_route_between_nodes)
     ASSERT_EQ(result.second, ref);
 }
 
-TEST(trees_and_graphs_tests, create_minimal_binary_search_tree)
+TEST(trees_and_graphs_tests, create_maximal_binary_search_tree)
 {
     std::vector<int> elements = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-    auto root = tree::create_minimal_binary_search_tree(elements);
+    auto root = tree::create_maximal_binary_search_tree(elements);
     std::vector<int> nodes;
     nodes.push_back(root->value);
     auto current_node = &root;

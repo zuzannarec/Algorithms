@@ -13,9 +13,9 @@ class Node
 {
 public:
     Node(int idx);
-    void add_child(int child_idx);
+    void add_neighbour(int child_idx);
     void visit();
-    std::vector<int> children;
+    std::vector<int> adjacency_list;
     int idx;
     bool visited = false;
 };
@@ -46,7 +46,7 @@ public:
     bool visited;
 };
 
-std::unique_ptr<Node> create_minimal_binary_search_tree(std::vector<int> elements);
+std::unique_ptr<Node> create_maximal_binary_search_tree(std::vector<int> elements);
 
 } // namespace tree
 

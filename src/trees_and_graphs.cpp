@@ -7,9 +7,9 @@ Node::Node(int idx)
     this->idx = idx;
 }
 
-void Node::add_child(int child_idx)
+void Node::add_neighbour(int child_idx)
 {
-    this->children.push_back(child_idx);
+    this->adjacency_list.push_back(child_idx);
 }
 
 void Node::visit()
@@ -46,7 +46,7 @@ std::pair<bool, std::vector<int>> bfs(Graph graph, int start_node_idx, int end_n
         {
             return std::make_pair(true, visited_nodes);
         }
-        for (auto& child_idx : graph.nodes[nodes_to_search.front()]->children)
+        for (auto& child_idx : graph.nodes[nodes_to_search.front()]->adjacency_list)
         {
             if (!graph.nodes[child_idx]->visited)
             {
@@ -74,7 +74,7 @@ void Node::visit()
     this->visited = true;
 }
 
-std::unique_ptr<Node> create_minimal_binary_search_tree(std::vector<int> elements)
+std::unique_ptr<Node> create_maximal_binary_search_tree(std::vector<int> elements)
 {
     auto it = elements.begin();
     auto root = std::unique_ptr<Node>(new Node(*it));
