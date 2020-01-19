@@ -20,21 +20,28 @@ TEST(trees_and_graphs_tests, find_route_between_nodes)
         it++;
     }
     graph::Graph graph = graph::Graph(nodes);
-    auto result = graph::bfs(graph, 3, 4);
-    ASSERT_FALSE(result.first);
+    auto bfs_result = graph::bfs(graph, 3, 4);
+    ASSERT_FALSE(bfs_result.first);
     graph.reset();
-    result = graph::bfs(graph, 0, 9);
-    ASSERT_TRUE(result.first);
+    bfs_result = graph::bfs(graph, 0, 9);
+    ASSERT_TRUE(bfs_result.first);
     graph.reset();
     std::vector<int> ref = {0, 1, 2, 6, 4, 3, 7, 5, 9};
-    ASSERT_EQ(result.second, ref);
+    ASSERT_EQ(bfs_result.second, ref);
 
-    auto result2 = graph::dfs(graph, 3, 4);
-    ASSERT_FALSE(result2);
+    auto dfs_result = graph::dfs(graph, 3, 4);
+    ASSERT_FALSE(dfs_result.first);
     graph.reset();
-    result2 = graph::dfs(graph, 0, 9);
-    ASSERT_TRUE(result2);
+    dfs_result = graph::dfs(graph, 0, 9);
+    ASSERT_TRUE(dfs_result.first);
     graph.reset();
+    ref = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    ASSERT_EQ(dfs_result.second, ref);
+    dfs_result = graph::dfs(graph, 6, 0);
+    ASSERT_TRUE(dfs_result.first);
+    graph.reset();
+    ref = {6, 7, 5, 4, 1, 0};
+    ASSERT_EQ(dfs_result.second, ref);
 }
 
 TEST(trees_and_graphs_tests, create_minimal_binary_search_tree)

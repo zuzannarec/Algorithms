@@ -59,23 +59,37 @@ std::pair<bool, std::vector<int>> bfs(Graph graph, int start_node_idx, int end_n
     return std::make_pair(false, visited_nodes);
 }
 
-bool dfs(Graph graph, int start_node_idx, int end_node_idx)
+std::pair<bool, std::vector<int>> dfs(Graph graph, int start_node_idx, int end_node_idx)
+{
+    std::vector<int> visited_nodes;
+    visited_nodes.reserve(graph.nodes.size());
+    return dfs_(graph, start_node_idx, end_node_idx, visited_nodes);
+}
+std::pair<bool, std::vector<int>> dfs_(Graph graph, int start_node_idx, int end_node_idx, std::vector<int> visited_nodes)
 {
     bool is_route = false;
     graph.nodes[start_node_idx]->visit();
+    visited_nodes.push_back(start_node_idx);
     if (start_node_idx == end_node_idx)
     {
-        return true;
+        return {true, visited_nodes};
     }
+    std::pair<bool, std::vector<int>> tmp;
     for (auto& each : graph.nodes[start_node_idx]->adjacency_list)
     {          
         if (!graph.nodes[each]->visited)
         {
             start_node_idx = each;
-            is_route = dfs(graph, start_node_idx, end_node_idx);
+            tmp = dfs_(graph, start_node_idx, end_node_idx, visited_nodes);
+            is_route = tmp.first;
+            visited_nodes = tmp.second;
+        }
+        if (is_route)
+        {
+            return {is_route, visited_nodes};
         }
     }
-    return is_route;
+    return {is_route, visited_nodes};
 }
 
 

@@ -28,7 +28,9 @@ public:
     void reset();
 };
 
-bool dfs(Graph graph, int start_node_idx, int end_node_idx);
+std::pair<bool, std::vector<int>> dfs(Graph graph, int start_node_idx, int end_node_idx);
+
+std::pair<bool, std::vector<int>> dfs_(Graph graph, int start_node_idx, int end_node_idx, std::vector<int> visited_nodes);
 
 std::pair<bool, std::vector<int>> bfs(Graph graph, int start_node_idx, int end_node_idx);
 
