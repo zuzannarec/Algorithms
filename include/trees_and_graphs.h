@@ -28,6 +28,8 @@ public:
     void reset();
 };
 
+bool dfs(Graph graph, int start_node_idx, int end_node_idx);
+
 std::pair<bool, std::vector<int>> bfs(Graph graph, int start_node_idx, int end_node_idx);
 
 } // namespace graph
@@ -46,7 +48,19 @@ public:
     bool visited;
 };
 
+void inOrder(Node* node, std::vector<int>& output);
+
+void preOrder(Node* node, std::vector<int>& output);
+
+void postOrder(Node* node, std::vector<int>& output);
+
+std::unique_ptr<Node> create_minimal_binary_search_tree(std::vector<int> elements);
+std::unique_ptr<Node> create_minimal_binary_search_tree_(std::vector<int> elements, int low_idx, int high_idx);
+
 std::unique_ptr<Node> create_maximal_binary_search_tree(std::vector<int> elements);
+
+bool elementFound(std::vector<char> elements, char element);
+std::vector<char> buildOrder(std::vector<char> projects,std::vector<std::pair<char, char>> dependencies);
 
 } // namespace tree
 
