@@ -1,4 +1,5 @@
 #include "array_and_strings.h"
+#include <sstream>
 
 bool check_if_unique(std::string str)
 {
@@ -445,4 +446,17 @@ bool string_rotation(std::string str1, std::string str2)
         return true;
     }
     return false;
+}
+
+std::vector<std::string> get_substr(std::string str, char delimiliter)
+{
+    std::string s;
+    std::vector<std::string> output;
+    std::istringstream iss(str);
+    while (std::getline(iss, s, delimiliter))
+    {
+        std::cout << s << std::endl;
+        output.push_back(s);
+    }
+    return output;
 }

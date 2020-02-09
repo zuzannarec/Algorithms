@@ -140,3 +140,10 @@ TEST(array_and_strings_tests, string_rotation) {
     str2 = "waterbotlte";
     ASSERT_FALSE(string_rotation(str1, str2));
 }
+
+TEST(array_and_strings_tests, get_substring) {
+    std::string str = "Error: incomplete type is not allowed";
+    auto output = get_substr(str, ' ');
+    std::vector<std::string> ref = {{"Error:"}, {"incomplete"}, {"type"}, {"is"}, {"not"}, {"allowed"}};
+    ASSERT_EQ(output, ref);
+}

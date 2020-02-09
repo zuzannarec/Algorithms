@@ -36,3 +36,5 @@ void replace_value(std::tuple<int, int>& start_idx, std::tuple<int, int> current
 void zero_matrix(std::vector<std::vector<int32_t>>& matrix);
 
 bool string_rotation(std::string str1, std::string str2);
+
+std::vector<std::string> get_substr(std::string str, char delimiliter);

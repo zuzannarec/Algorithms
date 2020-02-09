@@ -12,7 +12,8 @@ set(CMAKE_CXX_FLAGS "-std=c++17 -Wall -g -Wno-deprecated -pthread")
 add_library(${PROJECT_LIB_NAME_STR} STATIC
     "${PROJECT_SOURCE_DIR}/src/array_and_strings.cpp"
     "${PROJECT_SOURCE_DIR}/src/linked_lists.cpp"
-    "${PROJECT_SOURCE_DIR}/src/trees_and_graphs.cpp")
+    "${PROJECT_SOURCE_DIR}/src/trees_and_graphs.cpp"
+    "${PROJECT_SOURCE_DIR}/src/simple_graph.cpp")
 target_include_directories(${PROJECT_LIB_NAME_STR} PRIVATE "${PROJECT_SOURCE_DIR}/include")
 
 # exec setup
